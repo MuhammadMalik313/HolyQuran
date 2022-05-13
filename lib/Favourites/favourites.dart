@@ -9,7 +9,9 @@ import '../../main.dart';
 
 class Favourite extends StatefulWidget {
   // String playlistName;
-  Favourite({ Key? key, }) : super(key: key);
+  Favourite({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<Favourite> createState() => _FavouriteState();
@@ -19,28 +21,29 @@ class _FavouriteState extends State<Favourite> {
   @override
   Widget build(BuildContext context) {
     double _w = MediaQuery.of(context).size.width;
-    return  Scaffold(
-        appBar: AppBar(
-      
-          title: Text("AUDIO INDEX"),
-          centerTitle: true,
-          brightness: Brightness.dark,
-        ),
-        body: AnimationLimiter(
-          child: ValueListenableBuilder(
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("AUDIO INDEX"),
+        centerTitle: true,
+        brightness: Brightness.dark,
+      ),
+      body: AnimationLimiter(
+        child: ValueListenableBuilder(
             valueListenable: favSongsBox.listenable(),
-            builder: (BuildContext ctx, Box<Favourites> favSongs, Widget? child) {
+            builder:
+                (BuildContext ctx, Box<Favourites> favSongs, Widget? child) {
               return ListView.builder(
                 padding: EdgeInsets.all(_w / 30),
-                physics:
-                    BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+                physics: BouncingScrollPhysics(
+                    parent: AlwaysScrollableScrollPhysics()),
                 itemCount: favSongs.length,
                 itemBuilder: (BuildContext context, int index) {
 
                   Favourites? favSong = favSongs.getAt(index);
+
                   int surahno = index + 1;
 
-                    return AnimationConfiguration.staggeredList(
+                  return AnimationConfiguration.staggeredList(
                     position: index,
                     delay: Duration(milliseconds: 100),
                     child: SlideAnimation(
@@ -54,18 +57,30 @@ class _FavouriteState extends State<Favourite> {
                           child: ListTile(
                             title: Text(
                               quran.getSurahName(favSong!.favNo),
-                              style: TextStyle(fontSize: 20, fontFamily: "font3"),
+                              style:
+                                  TextStyle(fontSize: 20, fontFamily: "font3"),
                             ),
-                            subtitle: Text(quran.getSurahNameEnglish(favSong.favNo)),
-                            trailing: Icon(
-                              Icons.play_circle_outline_rounded,
-                              size: 35,
-                            ),
+                            subtitle:
+                                Text(quran.getSurahNameEnglish(favSong.favNo)),
+                            trailing: PopupMenuButton(
+                                itemBuilder: (context) => [
+                                      PopupMenuItem(
+                                        child: Text("Remove"),
+                                        onTap: (){
+                                          deleteFav(favSong.favNo);
+                                        },
+                                        value: 1,
+                                      ),
+                                    ]),
+
                             onTap: () {
                               Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (ctx) =>PlayAudio(index: favSong.favNo,)));
-                                  // getAudio();
+                                  builder: (ctx) => PlayAudio(
+                                        index: favSong.favNo,
+                                      )));
+                              // getAudio();
                             },
+
                             // onTap:  ,
                           ),
                           margin: EdgeInsets.only(bottom: _w / 20),
@@ -85,14 +100,20 @@ class _FavouriteState extends State<Favourite> {
                       ),
                     ),
                   );
-                  
-                  
                 },
               );
-            }
-          ),
-        ),
-      );
+            }),
+      ),
+    );
   }
+  deleteFav(int favSongId){
 
+    final Map<dynamic, Favourites> deliveriesMap = favSongsBox.toMap();
+    dynamic desiredKey;
+    deliveriesMap.forEach((key, value){
+        if (value.favNo == favSongId)
+            desiredKey = key;
+    });
+    favSongsBox.delete(desiredKey);
+  }
 }

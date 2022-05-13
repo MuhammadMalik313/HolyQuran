@@ -123,10 +123,11 @@ class _MyCustomWidgetState extends State<MyCustomWidget> {
             if (checkFavExist(favAdd.favNo)) {
               favSongsBox.add(favAdd);
               print("Added");
-            } else {
+            } 
+          }else {
+              deleteItem(widget.favIndex);
               print("Already Exists");
             }
-          }
         });
       },
       child: AnimatedContainer(
@@ -172,5 +173,14 @@ class _MyCustomWidgetState extends State<MyCustomWidget> {
       }
     }
     return true;
+  }
+  deleteItem(int id) {
+    final Map<dynamic, Favourites> deliveriesMap = favSongsBox.toMap();
+    dynamic desiredKey;
+    deliveriesMap.forEach((key, value){
+        if (value.favNo == id)
+            desiredKey = key;
+    });
+    favSongsBox.delete(desiredKey);
   }
 }
