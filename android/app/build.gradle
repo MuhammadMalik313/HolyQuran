@@ -26,6 +26,9 @@ apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
+    defaultConfig {
+        multiDexEnabled true
+    }
     compileSdkVersion flutter.compileSdkVersion
 
     compileOptions {
@@ -64,5 +67,6 @@ flutter {
 }
 
 dependencies {
+    compile 'com.android.support:multidex:1.0.1'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
