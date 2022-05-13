@@ -2,7 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:hive/hive.dart';
 import 'package:quraanproject/model/data_model.dart';
 
+
 ValueNotifier<List<PlayListModel>> PlayListNotifier=ValueNotifier([]);
+ValueNotifier<List<PlayListModel>> favListNotifier=ValueNotifier([]);
+
 Future<void> addPlaylist(PlayListModel value) async{
 
 
@@ -22,8 +25,6 @@ Future <void>getAllPlaylist() async{
   PlayListNotifier.value.clear();
   PlayListNotifier.value.addAll(playlistDB.values);
   PlayListNotifier.notifyListeners();
-
-
 
 }
 Future<void>getAllPlaylistSongs()async{

@@ -1,9 +1,14 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:quraanproject/Favourites/favourites.dart';
+import 'package:quraanproject/HomePage/favourite_button.dart';
+import 'package:quraanproject/model/data_model.dart';
 import 'package:quraanproject/screens/audio_name.dart';
-import 'package:quraanproject/screens/home_page.dart';
+import 'package:quraanproject/HomePage/home_page.dart';
 import 'package:quraanproject/screens/playlist/playlist_add.dart';
 import 'package:quran/quran.dart' as quran;
+
+import '../Favourites/fav_button.dart';
 
 dynamic count;
 
@@ -150,8 +155,7 @@ class _PlayAudioState extends State<PlayAudio> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    IconButton(
-                        onPressed: () {}, icon: Icon(Icons.favorite_border)),
+                    MyCustomWidget(favIndex: widget.index,),//###################################
                     Padding(
                       padding: const EdgeInsets.only(bottom: 23),
                       child: IconButton(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:quraanproject/screens/favourites.dart';
-import 'package:quraanproject/screens/home_page.dart';
+import 'package:quraanproject/Favourites/favourites.dart';
+import 'package:quraanproject/HomePage/home_page.dart';
 import 'package:quraanproject/screens/play_audio.dart';
 import 'package:quran/quran.dart' as quran;
 

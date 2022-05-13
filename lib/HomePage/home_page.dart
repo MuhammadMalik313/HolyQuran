@@ -8,7 +8,7 @@ import 'package:quraanproject/screens/animationscreen/chapter_name.dart';
 import 'package:quraanproject/screens/animationscreen/juzu.dart';
 import 'package:quraanproject/screens/animationscreen/home_text.dart';
 import 'package:quraanproject/screens/animationscreen/settings.dart';
-import 'package:quraanproject/screens/animationscreen/playlist_button.dart';
+import 'package:quraanproject/HomePage/favourite_button.dart';
 import 'package:quraanproject/screens/audio_name.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -143,7 +143,7 @@ class _HomePageState extends State<HomePage> {
               SizedBox(
                 height: 20,
               ),
-              PlayListButton(),
+              FavouritesButton(),
               SettingsButton()
              
             ],

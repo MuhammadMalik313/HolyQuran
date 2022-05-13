@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:quraanproject/model/data_model.dart';
 import 'package:quraanproject/screens/new_splash_screen.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 late Box<PlaylistSongs> playSongBox;
+late Box<Favourites> favSongsBox;
 
 Future main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -12,9 +12,12 @@ Future main(List<String> args) async {
   if (!Hive.isAdapterRegistered(PlayListModelAdapter().typeId)) {
     Hive.registerAdapter(PlayListModelAdapter());
     Hive.registerAdapter(PlaylistSongsAdapter());
+    Hive.registerAdapter(FavouritesAdapter());
   }
 
   playSongBox = await Hive.openBox<PlaylistSongs>("playlist_songs");
+  favSongsBox = await Hive.openBox<Favourites>("fav_songs");
+
   runApp(MyApp());
 }
 

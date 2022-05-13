@@ -53,17 +53,20 @@ class PlaylistSongsAdapter extends TypeAdapter<PlaylistSongs> {
     return PlaylistSongs(
       song: fields[0] as String,
       playListName: fields[1] as String,
+      chapterNo: fields[2] as int,
     );
   }
 
   @override
   void write(BinaryWriter writer, PlaylistSongs obj) {
     writer
-      ..writeByte(2)
+      ..writeByte(3)
       ..writeByte(0)
       ..write(obj.song)
       ..writeByte(1)
-      ..write(obj.playListName);
+      ..write(obj.playListName)
+      ..writeByte(2)
+      ..write(obj.chapterNo);
   }
 
   @override
@@ -73,6 +76,40 @@ class PlaylistSongsAdapter extends TypeAdapter<PlaylistSongs> {
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is PlaylistSongsAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
+class FavouritesAdapter extends TypeAdapter<Favourites> {
+  @override
+  final int typeId = 2;
+
+  @override
+  Favourites read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return Favourites(
+      favNo: fields[0] as int,
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, Favourites obj) {
+    writer
+      ..writeByte(1)
+      ..writeByte(0)
+      ..write(obj.favNo);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is FavouritesAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

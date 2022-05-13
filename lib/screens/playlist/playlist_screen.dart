@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quraanproject/functions/db_functions.dart';
 import 'package:quraanproject/model/data_model.dart';
+import 'package:quraanproject/screens/playlist/playlist_videos.dart';
 
 class Playlist extends StatefulWidget {
   const Playlist({Key? key}) : super(key: key);
@@ -62,7 +63,8 @@ class _PlaylistState extends State<Playlist> {
                             final data = playlist[index];
                             return ListTile(
                               onTap: () {
-                                print("object");
+                                print("object");//####go to play list song section
+                                Navigator.push(context, MaterialPageRoute(builder: (context)=>PlaylistSong(playlistName: data.name,)));
                               },
                               title: Text(data.name),
                             );

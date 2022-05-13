@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:quraanproject/screens/home_page.dart';
+import 'package:quraanproject/HomePage/home_page.dart';
 import 'package:quraanproject/screens/onboarding_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

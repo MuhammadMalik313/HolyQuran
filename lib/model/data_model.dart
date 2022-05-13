@@ -6,16 +6,28 @@ class PlayListModel {
   @HiveField(0)
   late String name;
   PlayListModel({required this.name});
-
 }
+
 @HiveType(typeId: 1)
-class PlaylistSongs{
+class PlaylistSongs {
   @HiveField(0)
   late String song;
   @HiveField(1)
   late String playListName;
-  PlaylistSongs({required this.song ,required this.playListName});
-
-
+  @HiveField(2)
+  late int chapterNo;
+  PlaylistSongs({
+    required this.song,
+    required this.playListName,
+    required this.chapterNo,
+  });
 }
 
+@HiveType(typeId: 2)
+class Favourites{
+
+  @HiveField(0)
+  int favNo;
+  
+  Favourites({required this.favNo});
+}

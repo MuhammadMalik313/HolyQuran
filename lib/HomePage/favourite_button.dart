@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:quraanproject/screens/favourites.dart';
-import 'package:quraanproject/screens/playlist/playlist_add.dart';
+import 'package:quraanproject/Favourites/favourites.dart';
 
-import '../settings.dart';
 
-class PlayListButton extends StatelessWidget {
-  const PlayListButton({ Key? key }) : super(key: key);
+class FavouritesButton extends StatelessWidget {
+  const FavouritesButton({ Key? key }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,8 +15,10 @@ class PlayListButton extends StatelessWidget {
                   elevation: 5,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(50))),
-              onPressed: () =>
-                  Navigator.push(context, SizeTransition3(Favourites())),
+              onPressed: () {
+                Navigator.push(context, SizeTransition3(Favourite()));
+              }
+                  ,
               child: Text(
                 'FAVOURITES',
                 style: TextStyle(fontSize: 23, fontFamily: "font1"),
