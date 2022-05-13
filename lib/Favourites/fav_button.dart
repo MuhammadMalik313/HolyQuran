@@ -160,10 +160,11 @@ class _MyCustomWidgetState extends State<MyCustomWidget> {
   }
 
   checkFavExist(int favNo) {
-    if (playSongBox.isNotEmpty) {
-      List<Favourites> playlistSong = favSongsBox.values.toList();
-      final isExists = playlistSong
+    if (favSongsBox.isNotEmpty) {
+      List<Favourites> favlistSong = favSongsBox.values.toList();
+      final isExists = favlistSong
           .where((itemToCheck) => itemToCheck.favNo == favNo);
+          print("#######################################################################");
       if (isExists.isEmpty) {
         return true; //no matching element found
       } else {
