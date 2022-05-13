@@ -54,17 +54,23 @@ class _PlaylistSongState extends State<PlaylistSong> {
                         child: Container(
                           child: ListTile(
                             title: Text(
-                              quran.getSurahName(playSong!.chapterNo),
+                              quran.getSurahName(playSong.chapterNo),
                               style: TextStyle(fontSize: 20, fontFamily: "font3"),
                             ),
                             subtitle: Text(quran.getSurahNameEnglish(playSong.chapterNo)),
-                            trailing: Icon(
-                              Icons.play_circle_outline_rounded,
-                              size: 35,
-                            ),
+                            trailing: PopupMenuButton(
+                                itemBuilder: (context) => [
+                                      PopupMenuItem(
+                                        child: Text("Remove"),
+                                        onTap: (){
+                                          deletePlaySong(playSong.chapterNo);
+                                        },
+                                        value: 1,
+                                      ),
+                                    ]),
                             onTap: () {
                               Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (ctx) =>PlayAudio(index: playSong!.chapterNo,)));
+                                  builder: (ctx) =>PlayAudio(index: playSong.chapterNo,)));
                                   // getAudio();
                             },
                             // onTap:  ,
@@ -96,6 +102,16 @@ class _PlaylistSongState extends State<PlaylistSong> {
           ),
         ),
       );
+  }
+  deletePlaySong(int playSongId){
+    print(playSongId);
+    final Map<dynamic, PlaylistSongs> deliveriesMap = playSongBox.toMap();
+    dynamic desiredKey;
+    deliveriesMap.forEach((key, value){
+        if (value.chapterNo == playSongId)
+            desiredKey = key;
+    });
+    playSongBox.delete(desiredKey);
   }
 
 }

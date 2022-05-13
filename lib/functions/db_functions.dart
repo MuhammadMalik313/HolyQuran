@@ -30,3 +30,15 @@ Future <void>getAllPlaylist() async{
 Future<void>getAllPlaylistSongs()async{
 
 }
+  deletePlaylist(String favSongId) async {
+    final playlistDB = await Hive.openBox<PlayListModel>('playlist_db');
+    final Map<dynamic, PlayListModel> deliveriesMap = playlistDB.toMap();
+    dynamic desiredKey;
+    deliveriesMap.forEach((key, value) {
+      if (value.name == favSongId) desiredKey = key;
+    });
+    playlistDB.delete(desiredKey);
+    PlayListNotifier.value.clear();
+    PlayListNotifier.value.addAll(playlistDB.values);
+    PlayListNotifier.notifyListeners();
+  }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:quraanproject/functions/db_functions.dart';
 import 'package:quraanproject/model/data_model.dart';
 import 'package:quraanproject/screens/playlist/playlist_videos.dart';
@@ -20,7 +21,8 @@ class _PlaylistState extends State<Playlist> {
       child: Scaffold(
         body: Column(
           children: [
-            Padding(//#########################################
+            Padding(
+              //#########################################
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 children: [
@@ -35,15 +37,13 @@ class _PlaylistState extends State<Playlist> {
                   ),
                   ElevatedButton.icon(
                     onPressed: () {
-                      onAddButton() async {
-                        final _playlist = _playListController.text;
-                        if (_playlist.isEmpty) {
-                          return;
-                        }
-                        print("$_playlist");
-                        final _playlist1 = PlayListModel(name: _playlist);
-                        addPlaylist(_playlist1);
+                      final _playlist = _playListController.text;
+                      if (_playlist.isEmpty) {
+                        return;
                       }
+                      print("$_playlist");
+                      final _playlist1 = PlayListModel(name: _playlist);
+                      addPlaylist(_playlist1);
 
                       ;
                     },
@@ -53,7 +53,8 @@ class _PlaylistState extends State<Playlist> {
                 ],
               ),
             ),
-            Expanded(//#########################################
+            Expanded(
+                //#########################################
                 child: ValueListenableBuilder(
                     valueListenable: PlayListNotifier,
                     builder: (BuildContext ctx, List<PlayListModel> playlist,
@@ -62,9 +63,25 @@ class _PlaylistState extends State<Playlist> {
                           itemBuilder: ((ctx, index) {
                             final data = playlist[index];
                             return ListTile(
+                              trailing: PopupMenuButton(
+                                  itemBuilder: (context) => [
+                                        PopupMenuItem(
+                                          child: Text("Remove"),
+                                          onTap: () {
+                                            deletePlaylist(data.name);
+                                          },
+                                          value: 1,
+                                        ),
+                                      ]),
                               onTap: () {
-                                print("object");//####go to play list song section
-                                Navigator.push(context, MaterialPageRoute(builder: (context)=>PlaylistSong(playlistName: data.name,)));
+                                print(
+                                    "object"); //####go to play list song section
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => PlaylistSong(
+                                              playlistName: data.name,
+                                            )));
                               },
                               title: Text(data.name),
                             );
@@ -81,4 +98,6 @@ class _PlaylistState extends State<Playlist> {
       ),
     );
   }
+
+
 }
