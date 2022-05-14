@@ -1,8 +1,5 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
-import 'package:quraanproject/Favourites/favourites.dart';
-import 'package:quraanproject/HomePage/favourite_button.dart';
-import 'package:quraanproject/model/data_model.dart';
 import 'package:quraanproject/screens/audio_name.dart';
 import 'package:quraanproject/HomePage/home_page.dart';
 import 'package:quraanproject/screens/playlist/playlist_add.dart';

@@ -152,27 +152,38 @@ class Mysearch extends SearchDelegate {
       child: Text(query),
     );
   }
-  final quranList=[];
+  var quranList=[];
+  
     
   
   @override
   Widget buildSuggestions(BuildContext context) {
+    quranList.clear();
     for(var i=1;i<=114;i++){
-      quranList.add(quran.getSurahNameEnglish(i));
+      quranList.add(quran.getSurahName(i));
+      
+      
     }
-    final listItems = query.isEmpty
-        ? quranList
-        : quranList
+    final List listItems;
+    if (query.isEmpty) {
+      listItems = quranList;
+    } else {
+      listItems = quranList
             .where((element) => element
                 .toLowerCase()
-                .startsWith(query.toLowerCase().toString()))
+                .contains(query.toLowerCase().toString()))
             .toList();
+
+    }
+           
 
     return listItems.isEmpty
         ? const Center(child: Text("No Data Found!"))
         : ListView.builder(
             itemCount: listItems.length,
             itemBuilder: (context, index) {
+              int i;
+
               return Padding(
                   padding: const EdgeInsets.only(left: 15.00, right: 15.00),
                   child: Column(
@@ -180,13 +191,13 @@ class Mysearch extends SearchDelegate {
                      ListTile(
                       
                       title: Text(
-                        quranList[index],
+                        listItems[index],
                         style: TextStyle(
                           fontSize: 20,
                           fontFamily: "font3",
                         ),
                       ),
-                      // subtitle: Text(quran.getSurahNameEnglish(index)),
+                      //  subtitle: Text(quran.getSurahNameEnglish()),
                       // trailing: Text(
                       //   quran.getSurahNameArabic(index),
                       //   style: TextStyle(
@@ -194,7 +205,7 @@ class Mysearch extends SearchDelegate {
                       // ),
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(
-                            builder: (ctx) => Qurancontent(surahno: index)));
+                            builder: (ctx) => Qurancontent(surahno: index+1)));
                       },
                     ),
                       

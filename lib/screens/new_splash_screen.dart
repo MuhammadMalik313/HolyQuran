@@ -42,7 +42,7 @@ alreadyUsed=prefs.getBool("alreadyUsed")?? false;
           ),
           Padding(
             padding: const EdgeInsets.only(top:100),
-            child: Center(child: Text("HOLY QURAN",style: TextStyle(fontSize: 50,fontFamily: "font7",fontWeight: FontWeight.bold,color: Color.fromARGB(255, 73, 147, 126)),)),
+            child: Center(child: Text("HOLY QUR'AN",style: TextStyle(fontSize: 45,fontFamily: "font4",fontWeight: FontWeight.bold,color: Color.fromARGB(255, 11, 117, 87)),)),
           )
         ],
       ),

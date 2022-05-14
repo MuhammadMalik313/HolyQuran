@@ -23,7 +23,7 @@ class _FavouriteState extends State<Favourite> {
     double _w = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
-        title: Text("AUDIO INDEX"),
+        title: Text("FAVOURITES"),
         centerTitle: true,
         brightness: Brightness.dark,
       ),
@@ -62,16 +62,28 @@ class _FavouriteState extends State<Favourite> {
                             ),
                             subtitle:
                                 Text(quran.getSurahNameEnglish(favSong.favNo)),
-                            trailing: PopupMenuButton(
-                                itemBuilder: (context) => [
-                                      PopupMenuItem(
-                                        child: Text("Remove"),
-                                        onTap: (){
-                                          deleteFav(favSong.favNo);
-                                        },
-                                        value: 1,
-                                      ),
-                                    ]),
+                            trailing: Wrap(
+                              children:[
+                                
+                                 Padding(
+                                   padding: const EdgeInsets.all(10.0),
+                                   child: Icon(
+                                     
+                                     Icons.favorite,
+                                     color: Colors.red,
+                                     ),
+                                 ),
+                                PopupMenuButton(
+                                  itemBuilder: (context) => [
+                                        PopupMenuItem(
+                                          child: Text("Remove"),
+                                          onTap: (){
+                                            deleteFav(favSong.favNo);
+                                          },
+                                          value: 1,
+                                        ),
+                                      ])],
+                            ),
 
                             onTap: () {
                               Navigator.of(context).push(MaterialPageRoute(

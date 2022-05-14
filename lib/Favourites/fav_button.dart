@@ -136,17 +136,7 @@ class _MyCustomWidgetState extends State<MyCustomWidget> {
         width: isHighlighted ? 50 : 45,
         curve: Curves.fastLinearToSlowEaseIn,
         duration: Duration(milliseconds: 300),
-        decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.2),
-              blurRadius: 20,
-              offset: Offset(5, 10),
-            ),
-          ],
-          color: Colors.white,
-          shape: BoxShape.circle,
-        ),
+       
         child: isPressed2
             ? Icon(
                 Icons.favorite_border,

@@ -29,12 +29,13 @@ environment:
 dependencies:
   analog_clock: ^0.1.0
   animated_text_kit: ^4.2.1
-  assets_audio_player: ^3.0.4+1
   audio_video_progress_bar: ^0.10.0
   audioplayers: ^0.20.1
   cupertino_icons: ^1.0.2
   flutter:
     sdk: flutter
+  flutter_markdown: ^0.6.10
+  flutter_share: ^2.0.0
   flutter_staggered_animations: ^1.0.0
   hijri: ^3.0.0
   hive: ^2.1.0
