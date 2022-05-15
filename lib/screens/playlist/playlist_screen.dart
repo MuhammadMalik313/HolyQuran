@@ -18,6 +18,7 @@ class _PlaylistState extends State<Playlist> {
     getAllPlaylist();
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(title: Text("PLAYLIST"),),
         body: Column(
           children: [
             Padding(

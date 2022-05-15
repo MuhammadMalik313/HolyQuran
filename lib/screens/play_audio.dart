@@ -69,7 +69,7 @@ class _PlayAudioState extends State<PlayAudio> {
       },
       child: Scaffold(
         appBar: AppBar(
-          actions: [IconButton(onPressed: () {}, icon: Icon(Icons.more_vert))],
+          
           leading: IconButton(
               onPressed: () {
                 Navigator.of(context).pushAndRemoveUntil(
@@ -85,166 +85,183 @@ class _PlayAudioState extends State<PlayAudio> {
             style: TextStyle(fontFamily: "font4", fontSize: 30),
           ),
         ),
-        body: Column(
-          children: [
-            Stack(
-              children: [
-                Container(
-                  height: _size.height * 0.50,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                    image: AssetImage("assets/audioimg.jpg"),
-                  )),
-                  child: Padding(
-                    padding: const EdgeInsets.all(20),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(top: 60),
-                          child: Text(
-                            'Surath ${quran.getSurahName(widget.index)}',
+        body: Container(
+          color: Colors.white,
+          child: Column(
+            children: [
+              Stack(
+                children: [
+                  Container(
+                    
+                    height: _size.height * 0.50,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                      image: AssetImage("assets/audioimg.jpg"),
+                    )),
+                    child: Padding(
+                      padding: const EdgeInsets.all(20),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(top: 60),
+                            child: Text(
+                              'Surath ${quran.getSurahName(widget.index)}',
+                              style: TextStyle(
+                                  fontSize: 40,
+                                  color: Color.fromARGB(255, 53, 7, 7),
+                                  fontFamily: "font6"),
+                            ),
+                          ),
+                          Text(
+                            'سورة ${quran.getSurahNameArabic(widget.index)}',
                             style: TextStyle(
                                 fontSize: 40,
                                 color: Color.fromARGB(255, 53, 7, 7),
-                                fontFamily: "font6"),
+                                fontFamily: "font2",
+                                fontWeight: FontWeight.w700),
                           ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  slider(),
+                  ListTile(
+                    leading: Padding(
+                      padding: const EdgeInsets.only(left: 8, bottom: 43),
+                      child: Text(
+                        position.toString().split(".").first,
+                        style: TextStyle(fontSize: 13),
+                      ),
+                    ),
+                    trailing: Padding(
+                      padding: const EdgeInsets.only(right: 8, bottom: 43),
+                      child: Text(
+                        totalDuration.toString().split(".").first,
+                        style: TextStyle(fontSize: 13),
+                      ),
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      MyCustomWidget(
+                        favIndex: widget.index,
+                      ), //###################################
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 23),
+                        child: IconButton(
+                            onPressed: () {
+                              if (widget.index == 1) {
+                                return;
+                              } else {
+                                Navigator.pushReplacement(
+                                  context,
+                                  PageRouteBuilder(
+                                    pageBuilder:
+                                        (context, animation1, animation2) =>
+                                            PlayAudio(
+                                      index: widget.index - 1,
+                                    ),
+                                    transitionDuration: Duration.zero,
+                                    reverseTransitionDuration: Duration.zero,
+                                  ),
+                                );
+                              }
+
+                              audioPlayer.stop();
+                              count--;
+                              getAudio();
+                              Icon(
+                                playing == true
+                                    ? Icons.play_circle_fill_outlined
+                                    : Icons.pause_circle_filled_outlined,
+                                size: 50,
+                              );
+
+                              // audioPlayer.pause();
+                            },
+                            icon: Icon(
+                              Icons.skip_previous_outlined,
+                              size: 50,
+                            )),
+                      ),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      InkWell(
+                        splashColor: Colors.grey,
+                        onTap: () {
+                          getAudio();
+                        },
+                        child: Icon(
+                          playing == true
+                              ? Icons.play_circle_fill_outlined
+                              : Icons.pause_circle_filled_outlined,
+                          size: 70,
                         ),
-                        Text(
-                          'سورة ${quran.getSurahNameArabic(widget.index)}',
-                          style: TextStyle(
-                              fontSize: 40,
-                              color: Color.fromARGB(255, 53, 7, 7),
-                              fontFamily: "font2",
-                              fontWeight: FontWeight.w700),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                slider(),
-                ListTile(
-                  leading: Padding(
-                    padding: const EdgeInsets.only(left: 8, bottom: 43),
-                    child: Text(
-                      position.toString().split(".").first,
-                      style: TextStyle(fontSize: 13),
-                    ),
-                  ),
-                  trailing: Padding(
-                    padding: const EdgeInsets.only(right: 8, bottom: 43),
-                    child: Text(
-                      totalDuration.toString().split(".").first,
-                      style: TextStyle(fontSize: 13),
-                    ),
-                  ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    MyCustomWidget(
-                      favIndex: widget.index,
-                    ), //###################################
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 23),
-                      child: IconButton(
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 23),
+                        child: IconButton(
                           onPressed: () {
-                            if (widget.index == 1) {
+                            if (widget.index == 114) {
                               return;
                             } else {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (ctx) => PlayAudio(
-                                    index: widget.index - 1,
+                              Navigator.pushReplacement(
+                                context,
+                                PageRouteBuilder(
+                                  pageBuilder:
+                                      (context, animation1, animation2) =>
+                                          PlayAudio(
+                                    index: widget.index + 1,
                                   ),
+                                  transitionDuration: Duration.zero,
+                                  reverseTransitionDuration: Duration.zero,
                                 ),
                               );
+                              audioPlayer.stop();
+                              count++;
+                              getAudio();
                             }
-
-                            audioPlayer.stop();
-                            count--;
-                            getAudio();
-                            Icon(
-                              playing == true
-                                  ? Icons.play_circle_fill_outlined
-                                  : Icons.pause_circle_filled_outlined,
-                              size: 50,
-                            );
-
-                            // audioPlayer.pause();
                           },
                           icon: Icon(
-                            Icons.skip_previous_outlined,
+                            Icons.skip_next_outlined,
                             size: 50,
-                          )),
-                    ),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    InkWell(
-                      splashColor: Colors.grey,
-                      onTap: () {
-                        getAudio();
-                      },
-                      child: Icon(
-                        playing == true
-                            ? Icons.play_circle_fill_outlined
-                            : Icons.pause_circle_filled_outlined,
-                        size: 70,
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 23),
-                      child: IconButton(
-                        onPressed: () {
-                          if (widget.index == 114) {
-                            return;
-                          } else {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (ctx) => PlayAudio(
-                                      index: widget.index + 1,
-                                    )));
-                            audioPlayer.stop();
-                            count++;
-                            getAudio();
-                          }
-                        },
-                        icon: Icon(
-                          Icons.skip_next_outlined,
-                          size: 50,
+                          ),
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      width: 15,
-                    ),
-                    IconButton(
-                        onPressed: () {
-                          audioPlayer.stop();
+                      SizedBox(
+                        width: 15,
+                      ),
+                      IconButton(
+                          onPressed: () {
+                            audioPlayer.stop();
 
-                          Navigator.pushReplacement(
-                            context,
-                            PageRouteBuilder(
-                              pageBuilder: (context, animation1, animation2) =>
-                                  AddPlaylist(
-                                songIndex: widget.index,
+                            Navigator.pushReplacement(
+                              context,
+                              PageRouteBuilder(
+                                pageBuilder: (context, animation1, animation2) =>
+                                    AddPlaylist(
+                                  songIndex: widget.index,
+                                ),
+                                transitionDuration: Duration(seconds: 0),
                               ),
-                              transitionDuration: Duration(seconds: 0),
-                            ),
-                          );
-                        },
-                        icon: Icon(Icons.playlist_add)),
-                  ],
-                ),
-              ],
-            ),
-          ],
+                            );
+                          },
+                          icon: Icon(Icons.playlist_add)),
+                    ],
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

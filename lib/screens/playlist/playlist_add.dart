@@ -20,6 +20,10 @@ class _AddPlaylistState extends State<AddPlaylist> {
     getAllPlaylist();
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text("PLAYLIST"),
+        ),
         body: Column(
           children: [
             Padding(
@@ -62,19 +66,20 @@ class _AddPlaylistState extends State<AddPlaylist> {
                           itemBuilder: ((ctx, index) {
                             final data = playlist[index];
                             return ListTile(
-                              onTap: () {//song add section
-                                 //##########################song add to play list sec
+                              onTap: () {
+                                //song add section
+                                //##########################song add to play list sec
                                 final playlistSong = PlaylistSongs(
-                                    playListName: data.name,
-                                    song:
-                                        "https://server7.mp3quran.net/s_gmd/${widget.songIndex}.mp3",
-                                        chapterNo: widget.songIndex,
-                                        );
-                                if(checkWatchlater(playlistSong)){
+                                  playListName: data.name,
+                                  song:
+                                      "https://server7.mp3quran.net/s_gmd/${widget.songIndex}.mp3",
+                                  chapterNo: widget.songIndex,
+                                );
+                                if (checkWatchlater(playlistSong)) {
                                   playSongBox.add(playlistSong);
                                   Navigator.pop(context);
                                   print("added");
-                                }else{
+                                } else {
                                   Navigator.pop(context);
                                   print("Already exists");
                                 }
@@ -96,18 +101,19 @@ class _AddPlaylistState extends State<AddPlaylist> {
       ),
     );
   }
+
   //#####################song in db or not checking
   checkWatchlater(PlaylistSongs playlistsSong) {
-  if (playSongBox.isNotEmpty) {
-    List<PlaylistSongs> playlistSong = playSongBox.values.toList();
-    final isExists = playlistSong
-        .where((itemToCheck) => itemToCheck.song == playlistsSong.song);
-    if (isExists.isEmpty) {
-      return true; //no matching element found
-    } else {
-      return false; //matching element found in db
+    if (playSongBox.isNotEmpty) {
+      List<PlaylistSongs> playlistSong = playSongBox.values.toList();
+      final isExists = playlistSong
+          .where((itemToCheck) => itemToCheck.song == playlistsSong.song);
+      if (isExists.isEmpty) {
+        return true; //no matching element found
+      } else {
+        return false; //matching element found in db
+      }
     }
+    return true;
   }
-  return true;
-}
 }
