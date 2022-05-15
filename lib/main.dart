@@ -1,3 +1,4 @@
+import 'package:audio_service/audio_service.dart';
 import 'package:flutter/material.dart';
 import 'package:quraanproject/model/data_model.dart';
 import 'package:quraanproject/screens/new_splash_screen.dart';
@@ -34,6 +35,6 @@ class _MyAppState extends State<MyApp> {
         debugShowCheckedModeBanner: false,
         title: "THE HOLY QURAN",
         theme: ThemeData(primaryColor: Color.fromARGB(255, 38, 94, 189)),
-        home: SplashScreen1());
+        home: AudioServiceWidget(child: SplashScreen1()));
   }
 }

@@ -28,7 +28,7 @@ alreadyUsed=prefs.getBool("alreadyUsed")?? false;
 
     Timer(Duration(seconds: 3), () => Navigator.pushReplacement(context,
     MaterialPageRoute(builder: (context) {
-      return alreadyUsed?OnBoardingScreen():  HomePage();})
+      return alreadyUsed? HomePage(): OnBoardingScreen();})
     ),);
   }
   @override

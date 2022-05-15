@@ -57,9 +57,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
           MaterialPageRoute(builder: (context) => HomePage()),
         );
       },
-      onSkip: () {
-        // You can also override onSkip callback
-      },
+      
       showNextButton: true,
       next: const Icon(
         Icons.arrow_forward,

@@ -29,7 +29,7 @@ environment:
 dependencies:
   analog_clock: ^0.1.0
   animated_text_kit: ^4.2.1
-  audio_video_progress_bar: ^0.10.0
+  audio_service: ^0.18.4
   audioplayers: ^0.20.1
   cupertino_icons: ^1.0.2
   flutter:

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:quraanproject/functions/db_functions.dart';
 import 'package:quraanproject/model/data_model.dart';
 import 'package:quraanproject/screens/playlist/playlist_videos.dart';

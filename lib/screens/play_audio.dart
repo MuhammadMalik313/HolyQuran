@@ -33,7 +33,6 @@ class _PlayAudioState extends State<PlayAudio> {
   bool playing = true;
 
   initAudio() {
-
     audioPlayer.onDurationChanged.listen((updatedDuration) {
       setState(() {
         totalDuration = updatedDuration;
@@ -48,14 +47,12 @@ class _PlayAudioState extends State<PlayAudio> {
 
   @override
   void initState() {
-     count = widget.index.toString().padLeft(3, "0");
-    
+    count = widget.index.toString().padLeft(3, "0");
+
     initAudio();
     super.initState();
 
-   
-
-       getAudio();
+    getAudio();
   }
 
   @override
@@ -73,7 +70,7 @@ class _PlayAudioState extends State<PlayAudio> {
       child: Scaffold(
         appBar: AppBar(
           actions: [IconButton(onPressed: () {}, icon: Icon(Icons.more_vert))],
-          leading: IconButton( 
+          leading: IconButton(
               onPressed: () {
                 Navigator.of(context).pushAndRemoveUntil(
                     MaterialPageRoute(builder: (context) => HomePage()),
@@ -104,7 +101,6 @@ class _PlayAudioState extends State<PlayAudio> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        
                         Padding(
                           padding: const EdgeInsets.only(top: 60),
                           child: Text(
@@ -152,7 +148,9 @@ class _PlayAudioState extends State<PlayAudio> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    MyCustomWidget(favIndex: widget.index,),//###################################
+                    MyCustomWidget(
+                      favIndex: widget.index,
+                    ), //###################################
                     Padding(
                       padding: const EdgeInsets.only(bottom: 23),
                       child: IconButton(
@@ -229,15 +227,17 @@ class _PlayAudioState extends State<PlayAudio> {
                     IconButton(
                         onPressed: () {
                           audioPlayer.stop();
-                         
 
-                       Navigator.pushReplacement(
-      context, 
-      PageRouteBuilder(
-        pageBuilder: (context, animation1, animation2) => AddPlaylist(songIndex: widget.index,),
-        transitionDuration: Duration(seconds: 0),
-    ),
-);
+                          Navigator.pushReplacement(
+                            context,
+                            PageRouteBuilder(
+                              pageBuilder: (context, animation1, animation2) =>
+                                  AddPlaylist(
+                                songIndex: widget.index,
+                              ),
+                              transitionDuration: Duration(seconds: 0),
+                            ),
+                          );
                         },
                         icon: Icon(Icons.playlist_add)),
                   ],

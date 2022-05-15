@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../settings.dart';
+import '../../settingspage/settings.dart';
 
 class SettingsButton extends StatelessWidget {
   const SettingsButton({Key? key}) : super(key: key);
