@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:hive/hive.dart';
+import 'package:quraanproject/main.dart';
 import 'package:quraanproject/model/data_model.dart';
 
 
@@ -30,15 +31,38 @@ Future <void>getAllPlaylist() async{
 Future<void>getAllPlaylistSongs()async{
 
 }
-  deletePlaylist(String favSongId) async {
+  deletePlaylist(String playSongId) async {
     final playlistDB = await Hive.openBox<PlayListModel>('playlist_db');
     final Map<dynamic, PlayListModel> deliveriesMap = playlistDB.toMap();
     dynamic desiredKey;
     deliveriesMap.forEach((key, value) {
-      if (value.name == favSongId) desiredKey = key;
+      if (value.name == playSongId) desiredKey = key;
     });
     playlistDB.delete(desiredKey);
     PlayListNotifier.value.clear();
     PlayListNotifier.value.addAll(playlistDB.values);
     PlayListNotifier.notifyListeners();
   }
+
+
+editPlaylist({required oldValue, required newValue, required index,}) async{
+   final playlistDB = await Hive.openBox<PlayListModel>('playlist_db');
+    final Map<dynamic, PlayListModel> deliveriesMap = playlistDB.toMap();
+    dynamic desiredKey;
+    deliveriesMap.forEach((key, value) {
+      if (value.name == oldValue) desiredKey = key;
+    });
+    PlayListModel playModel = PlayListModel(name: newValue);
+    playlistDB.put(desiredKey, playModel);
+
+    final Map<dynamic, PlaylistSongs> playSongMap = playSongBox.toMap();
+    playSongMap.forEach((key, value) {
+      if (value.playListName == oldValue) 
+      desiredKey = key;
+      PlaylistSongs playSongsModel = PlaylistSongs(playListName: newValue, chapterNo: index, song: '');
+      playSongBox.put(desiredKey, playSongsModel);
+    });
+
+    
+    
+}
